@@ -1,5 +1,6 @@
 package com.margin.model.net;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.annotation.Nullable;
 
@@ -19,24 +20,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetServiceProvider<T> {
     private static NetServiceProvider sInstance;
     private Context mContext;
-
-    public static NetServiceProvider instance(Context context) {
-        if (sInstance == null) {
-            synchronized (NetServiceProvider.class) {
-                if (sInstance == null) {
-                    sInstance = new NetServiceProvider(context);
-                }
-            }
-        }
-        return sInstance;
-    }
+    private T mService;
 
     private NetServiceProvider(Context context) {
         mContext = context;
     }
 
+    public static <T> void init(Context context, Class<T> clazz, String baseUrl) {
+        sInstance = new NetServiceProvider(context);
+        sInstance.mService = sInstance.service(clazz, baseUrl);
+    }
+
 //    初始化
-    public synchronized  T provider(Class<T> clazz, String baseUrl) {
+    public synchronized  T service(Class<T> clazz, String baseUrl) {
         OkHttpConfig.createCache(mContext.getCacheDir());
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -45,6 +41,14 @@ public class NetServiceProvider<T> {
                 .client(OkHttpConfig.client(mContext))
                 .build();
         return retrofit.create(clazz);
+    }
+    public static NetServiceProvider getInstance() {
+        return sInstance;
+    }
+
+
+    public T getService() {
+        return mService;
     }
 
 }

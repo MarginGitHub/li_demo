@@ -16,17 +16,17 @@ public class Categorys {
      * categoryList : [{"categoryId":"4","name":"娱乐","color":"#E966AE"},{"categoryId":"1","name":"社会","color":"#F04A50"}]
      */
 
-    private String resultCode;
+    private int resultCode;
     private String resultMsg;
     private String reqId;
     private String systemTime;
     private List<CategoryItem> categoryList;
 
-    public String getResultCode() {
+    public int getResultCode() {
         return resultCode;
     }
 
-    public void setResultCode(String resultCode) {
+    public void setResultCode(int resultCode) {
         this.resultCode = resultCode;
     }
 

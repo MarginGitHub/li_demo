@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.margin.lishipin.ui.MainActivity">
+    tools:context="com.margin.livideo.ui.MainActivity">
 
-    <com.margin.lishipin.ui.view.NoSlidingViewPaper
+    <com.margin.livideo.ui.view.NoSlidingViewPaper
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
